@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bb43107228ea64bb426558514db28f, type: 3}
+  m_Name: Jump
+  m_EditorClassIdentifier: 
+  AbilityName: Jump
+  MoveType: 4
+  SubAttackType: 0
+  SubMoveType: 1
+  SubPlacementType: 0
+  AriaOfEffect: 1
+  EnimeAttack: 0
+  Magicneeded:
+    Red: 5
+    Blue: 0
+    Green: 0
+    Yellow: 0
+    Dark: 0
+    Light: 0
+  movePower: 2
+  Damage: 5
+  Placement: {fileID: 0}
