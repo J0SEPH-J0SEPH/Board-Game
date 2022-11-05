@@ -6,65 +6,37 @@ public class GameBord : MonoBehaviour
 {
 
     public static GameBord instance;
-
-    public List<Spaces> spaces = new List<Spaces>();
-
+    public List<BoardSpaces> spaces = new List<BoardSpaces>();
     public GameObject spaceTile;
-
     public int width;
     public int height;
-
     public Gamebordfiles GFile;
-
     public Transform PointsTomoveToHolder;
-
     public ClickToMove MoveToPoint;
 
-    
-
     // Start is called before the first frame update
-    void Start()
-    {
-
-        
-
+    void Start(){
         instance = this;
-
-       
-
     }
 
-   public void CreatBord()
-    {
+   public void CreatBord(){
         width = GFile.width;
         height = GFile.height;
-
-        for (int i = 0; i < width; i++)
-        {
+        for (int i = 0; i < width; i++){
             for (int j = 0; j < height; j++)
             {
-                Spaces currentSpace;
+                BoardSpaces currentSpace;
 
-                if (j % 2 == 0)
-                {
-                    currentSpace = Instantiate(spaceTile, transform.position + Vector3.left * j + Vector3.forward * i , transform.rotation, transform).GetComponent<Spaces>();
-                    
+                if (j % 2 == 0){
+                    currentSpace = Instantiate(spaceTile, transform.position + Vector3.left * j + Vector3.forward * i , transform.rotation, transform).GetComponent<BoardSpaces>(); 
                 }
-                else
-                {
-                    currentSpace = Instantiate(spaceTile, transform.position + Vector3.left * j  + Vector3.forward * (i+0.5f) , transform.rotation, transform).GetComponent<Spaces>();
-
+                else{
+                    currentSpace = Instantiate(spaceTile, transform.position + Vector3.left * j  + Vector3.forward * (i+0.5f) , transform.rotation, transform).GetComponent<BoardSpaces>();
                 }
-
                 currentSpace.colour = GFile.TileColourList[i * (height) + j];
-
                 currentSpace.power = GFile.TilePowerList[i * (height) + j];
-
                 currentSpace.name = i + "-" + j;
-
                 spaces.Add(currentSpace);
-
-               
 
                 if (i == 1 && j == 3)
                 {
@@ -76,5 +48,4 @@ public class GameBord : MonoBehaviour
         TheGame.instance.Moves = 1;
         TheGame.instance.state = BattleState.PLAYER1TURN;
     }
-   
 }

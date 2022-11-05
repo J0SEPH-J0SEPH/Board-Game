@@ -6,15 +6,12 @@ public class PlayerGameMovement : MonoBehaviour
 {
     public string Name = "Monster";
     public GameBord GM;
-    public Spaces SP;
-
+    public BoardSpaces SP;
     public float Health = 10;
-
-    public List<Abilities> PlayerAbilitys;
-
+    public List<Abilities> PlayerAbilities;
     public int PlayerTeam = 0;
-
     public bool ToxicImunity = false;
+
     // Start is called before the first frame update
     void Start()
     {

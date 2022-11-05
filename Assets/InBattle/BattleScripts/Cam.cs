@@ -5,29 +5,17 @@ using UnityEngine;
 public class Cam : MonoBehaviour
 {
     public Transform CameraPos;
-
     public Transform Target;
-
     public float SmoothMovement = 0.1f;
-
-
     public Vector3 moveDirection;
-
     public float Speed = 10; 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         if(Target != null)
         {
-            transform.position = Vector3.Lerp(transform.position, Target.position, SmoothMovement*Time.deltaTime);
-
+            transform.position = Vector3.Lerp(transform.position, Target.position, SmoothMovement * Time.deltaTime);
         }
 
         moveDirection = transform.forward*Input.GetAxis("Vertical") + transform.right* Input.GetAxis("Horizontal");
@@ -36,9 +24,6 @@ public class Cam : MonoBehaviour
         {
             Target = null;
         }
-       
-
-
         transform.position += Vector3.Normalize(moveDirection)*Time.deltaTime*Speed;
     }
 }

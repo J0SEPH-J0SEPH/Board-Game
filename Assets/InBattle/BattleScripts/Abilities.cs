@@ -7,8 +7,7 @@ public class Abilities : ScriptableObject
 {
 
 
-    public enum Abilitys
-    {
+    public enum Abilitys{
         Melee,
         Placement,
         Effect,
@@ -17,8 +16,7 @@ public class Abilities : ScriptableObject
     };
 
 
-    public enum Melee
-    {
+    public enum Melee{
         AttackRound,
         AttackDiagnals,
         AttackwithSpacePower
@@ -26,14 +24,12 @@ public class Abilities : ScriptableObject
 
 
 
-    public enum Move
-    {
+    public enum Move{
         TakeMultipalMoves,
         JumpToSpace
     };
 
-    public enum Place
-    {
+    public enum Place{
         Poison,
         Bomb,
         Tower,
@@ -41,8 +37,7 @@ public class Abilities : ScriptableObject
     };
 
 
-    public enum AttackAria
-    {
+    public enum AttackAria{
         Around,
         Out2,
         Out3,
@@ -55,8 +50,7 @@ public class Abilities : ScriptableObject
 
 
     [System.Serializable]
-    public class Magic
-    {
+    public class Magic{
         public int Red;
         public int Blue;
         public int Green;
@@ -68,32 +62,21 @@ public class Abilities : ScriptableObject
 
 
     [Header("Ability Info")]
-
     public string AbilityName;
-
     public Abilitys MoveType;
-
     public Melee SubAttackType;
-
     public Move SubMoveType;
-
     public Place SubPlacementType;
-
     [Header("Ability Effect Aria")]
-
     public AttackAria AriaOfEffect;
-
     public bool EnimeAttack;
-
 
     [Header("Ability Cost")]
     public Magic Magicneeded;
     // Start is called before the first frame update
 
-
     [Header("movemultipalSpacesPower")]
     public int movePower = 2;
-
 
     [Header("AbilityPower")]
     public int Damage = 5;

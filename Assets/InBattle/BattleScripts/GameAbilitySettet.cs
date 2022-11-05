@@ -9,7 +9,6 @@ public class GameAbilitySettet : MonoBehaviour
     public TheGame GM;
     public int AmountofMoves;
 
-
     public void CheckAbillityToUse(Abilities AbilityInfo,Transform spaceSelected)
     {
         switch (AbilityInfo.MoveType)
@@ -17,157 +16,111 @@ public class GameAbilitySettet : MonoBehaviour
             case Abilities.Abilitys.move:
                 if (AbilityInfo.SubMoveType == Abilities.Move.TakeMultipalMoves)
                 {
-                   
-
+                    //Unfinished
                 }
                 if (AbilityInfo.SubMoveType == Abilities.Move.JumpToSpace)
                 {
-                    Spaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
+                    BoardSpaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
                     GM.CurrentSelectedPlayer.transform.position = spaceSelected.transform.position;
                     GM.CurrentSelectedPlayer.SP.HasPlayer = false;
-                    GM.CurrentSelectedPlayer.SP.pLayerOn = null;
+                    GM.CurrentSelectedPlayer.SP.PlayerOn = null;
                     GM.CurrentSelectedPlayer.SP = SelectedSpace;
                     SelectedSpace.HasPlayer = true;
-                    SelectedSpace.pLayerOn = GM.CurrentSelectedPlayer;
-
+                    SelectedSpace.PlayerOn = GM.CurrentSelectedPlayer;
                     SelectedSpace.HasPlayer = true;
 
                     if (SelectedSpace.colour == 8)
                     {
                         GM.CurrentSelectedPlayer.Health -= (SelectedSpace.power + 1);
                     }
-
-
                 }
                 break;
             case Abilities.Abilitys.Melee:
-                if (AbilityInfo.SubAttackType == Abilities.Melee.AttackRound)
-                {
-                    Spaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
+                if (AbilityInfo.SubAttackType == Abilities.Melee.AttackRound){
+                    BoardSpaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
 
+                    if (SelectedSpace.HasPlayer){
+                        SelectedSpace.PlayerOn.Health -= AbilityInfo.Damage;
 
-                    if (SelectedSpace.HasPlayer)
-                    {
-                        SelectedSpace.pLayerOn.Health -= AbilityInfo.Damage;
-
-                        if (SelectedSpace.pLayerOn.Health <= 0)
+                        if (SelectedSpace.PlayerOn.Health <= 0)
                         {
-                            PlayerGameMovement PG = SelectedSpace.pLayerOn;
+                            PlayerGameMovement PG = SelectedSpace.PlayerOn;
 
-
-                            if (SelectedSpace.pLayerOn.PlayerTeam == 1) {
+                            if (SelectedSpace.PlayerOn.PlayerTeam == 1) {
                                 SelectedSpace.HasPlayer = false;
-
                                 GM.ActiveTeam1.Remove(PG);
-                               
                             }
-                            else
-                            {
+                            else{
                                 SelectedSpace.HasPlayer = false;
                                 GM.ActiveTeam2.Remove(PG);
-                                SelectedSpace.pLayerOn = null;
-
+                                SelectedSpace.PlayerOn = null;
                             }
-
-
                             Destroy(PG.gameObject);
-
                         }
                     }
                 }
 
                 if (AbilityInfo.SubAttackType == Abilities.Melee.AttackwithSpacePower)
                 {
-                    Spaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
+                    BoardSpaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
 
+                    if (SelectedSpace.HasPlayer){
+                        SelectedSpace.PlayerOn.Health -= (AbilityInfo.Damage + SelectedSpace.power);
 
-                    if (SelectedSpace.HasPlayer)
-                    {
-                        SelectedSpace.pLayerOn.Health -= (AbilityInfo.Damage + SelectedSpace.power);
+                        if (SelectedSpace.PlayerOn.Health <= 0){
+                            PlayerGameMovement PG = SelectedSpace.PlayerOn;
 
-                        if (SelectedSpace.pLayerOn.Health <= 0)
-                        {
-                            PlayerGameMovement PG = SelectedSpace.pLayerOn;
-
-
-                            if (SelectedSpace.pLayerOn.PlayerTeam == 1)
-                            {
+                            if (SelectedSpace.PlayerOn.PlayerTeam == 1){
                                 SelectedSpace.HasPlayer = false;
-
                                 GM.ActiveTeam1.Remove(PG);
-
                             }
-                            else
-                            {
+                            else{
                                 SelectedSpace.HasPlayer = false;
                                 GM.ActiveTeam2.Remove(PG);
-                                SelectedSpace.pLayerOn = null;
-
+                                SelectedSpace.PlayerOn = null;
                             }
-
-
+                            ///////Possibly bad Optimization
                             Destroy(PG.gameObject);
-
                         }
                     }
                 }
                 break;
 
             case Abilities.Abilitys.Placement:
-                if (AbilityInfo.SubPlacementType == Abilities.Place.Bomb)
-                {
-
+                if (AbilityInfo.SubPlacementType == Abilities.Place.Bomb){
+                    //Incomplete
                 }
 
-                if (AbilityInfo.SubPlacementType == Abilities.Place.SpaceUpgrade)
-                {
-                    Spaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
+                if (AbilityInfo.SubPlacementType == Abilities.Place.SpaceUpgrade){
+                    BoardSpaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
                     SelectedSpace.power += AbilityInfo.movePower;
                     SelectedSpace.UpdateSpace();
                 }
 
-                if (AbilityInfo.SubPlacementType == Abilities.Place.Poison)
-                {
-                    Spaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
-
+                if (AbilityInfo.SubPlacementType == Abilities.Place.Poison){
+                    BoardSpaces SelectedSpace = spaceSelected.transform.GetComponent<ClickToMove>().Space;
                     SelectedSpace.colour = 8;
                     SelectedSpace.UpdateSpace();
+                    if (SelectedSpace.HasPlayer){
+                        SelectedSpace.PlayerOn.Health -= (SelectedSpace.power +1);
+                        if (SelectedSpace.PlayerOn.Health <= 0){
+                            PlayerGameMovement PG = SelectedSpace.PlayerOn;
 
-                    if (SelectedSpace.HasPlayer)
-                    {
-                        SelectedSpace.pLayerOn.Health -= (SelectedSpace.power +1);
-
-                        if (SelectedSpace.pLayerOn.Health <= 0)
-                        {
-                            PlayerGameMovement PG = SelectedSpace.pLayerOn;
-
-
-                            if (SelectedSpace.pLayerOn.PlayerTeam == 1)
-                            {
+                            if (SelectedSpace.PlayerOn.PlayerTeam == 1){
                                 SelectedSpace.HasPlayer = false;
-
                                 GM.ActiveTeam1.Remove(PG);
-
                             }
-                            else
-                            {
+                            else{
                                 SelectedSpace.HasPlayer = false;
                                 GM.ActiveTeam2.Remove(PG);
-                                SelectedSpace.pLayerOn = null;
-
+                                SelectedSpace.PlayerOn = null;
                             }
-
-
                             Destroy(PG.gameObject);
-
                         }
                     }
                 }
                 break;
-
         }
-
-
         TheGame.instance.ClearMoveSpaces();
         TheGame.instance.Moves -= 1;
     }

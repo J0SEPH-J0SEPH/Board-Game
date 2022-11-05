@@ -7,12 +7,8 @@ using UnityEngine;
 public class Gamebordfiles : ScriptableObject
 {
     public string bordName;
-
     public List<int> TileColourList;
-
     public List<int> TilePowerList;
-
     public int width;
-
     public int height;
 }

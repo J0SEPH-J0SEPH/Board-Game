@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ClickToMove : MonoBehaviour
 {
-    public Spaces Space;
+    public BoardSpaces Space;
 }

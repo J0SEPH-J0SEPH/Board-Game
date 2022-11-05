@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClickToAttack : MonoBehaviour
 {
-    public Spaces Space;
+    public BoardSpaces Space;
 
     public PlayerGameMovement player;
 }

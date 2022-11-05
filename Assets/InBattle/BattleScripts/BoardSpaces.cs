@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class Spaces : MonoBehaviour
+public class BoardSpaces : MonoBehaviour
 {
-
     public int power;
     public int colour;
     public int value;
-
     public MeshRenderer mr;
-
     public TextMeshPro PowerGUI;
-
     public bool HasPlayer = false;
-
-    public PlayerGameMovement pLayerOn;
+    public PlayerGameMovement PlayerOn;
 
     // Start is called before the first frame update
-
     void Start()
     {
         UpdateSpace();
@@ -83,7 +77,7 @@ public class Spaces : MonoBehaviour
             player.GM = GameBord.instance;
             TheGame.instance.ActiveTeam1.Add(player);
             HasPlayer = true;
-            pLayerOn = player;
+            PlayerOn = player;
             player.PlayerTeam = 1;
         }
     }
@@ -100,7 +94,7 @@ public class Spaces : MonoBehaviour
             player.GM = GameBord.instance;
             TheGame.instance.ActiveTeam2.Add(player);
             HasPlayer = true;
-            pLayerOn = player;
+            PlayerOn = player;
             player.PlayerTeam = 2;
         }
     }
